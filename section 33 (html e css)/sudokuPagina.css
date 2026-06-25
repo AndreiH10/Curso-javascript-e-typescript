@@ -1,5 +1,7 @@
 body {
     background-color: rgb(210, 177, 126);
+    display: flex;
+    justify-content: center;
 }
 
 h1{
@@ -11,3 +13,4 @@ header{
     width: 40%;
     
 }
+
