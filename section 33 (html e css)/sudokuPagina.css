@@ -1,5 +1,10 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
-    background-color: rgb(210, 177, 126);
+    background-color: rgb(144, 231, 199);
     display: flex;
     justify-content: center;
 }
@@ -9,8 +14,7 @@ h1{
 }
 
 header{
-    background-color: white;
-    width: 40%;
-    
+    background-color: rgb(94, 204, 212);
+    width: 100%;
 }
 
