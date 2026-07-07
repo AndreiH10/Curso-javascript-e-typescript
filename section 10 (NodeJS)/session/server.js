@@ -14,7 +14,7 @@ mongoose.connect(process.env.CONNECTIONSTRING)
     .catch(e => console.log(e));
 
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo').default || require('connect-mongo');
 const flash = require('connect-flash');
 
 app.use(express.urlencoded({extended: true}));
