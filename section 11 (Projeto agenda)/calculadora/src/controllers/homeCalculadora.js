@@ -1,3 +1,5 @@
+const CalculosModel = require('../models/CalculosModel');
+
 exports.home = (req, res) => {
     res.render('paginaCalculadora');
 }
@@ -12,4 +14,27 @@ exports.calculo = (req, res) => {
     if (operacao === 'subtracao') resultado = n1 - n2;
 
     res.render('paginaResultado', { resultado });
+}
+
+exports.calculo2 = (req, res) => {
+    const expressao = req.body.expressao;
+    let resultado;
+
+    try{
+        resultado = eval(expressao);
+    } catch(e){
+        resultado = 'Erro na expressão';
+    }
+    
+
+
+    CalculosModel.create({
+        calculo: expressao,
+        resultado: resultado
+    })
+    .then(dados=>{
+        console.log(dados);
+        return res.render('paginaResultado', { resultado });
+    })
+    .catch(e=>console.log(e));
 }

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
 </head>
+
 <body>
+    <h1>Calculadora 1</h1>
     <form action="calcular" method="post">
         <input type="number" name="num1" required>
         <select name="operacao">
@@ -15,5 +18,13 @@
         <input type="number" name="num2" required>
         <button type="submit">Calcular</button>
     </form>
+    <br>
+
+    <h1>Calculadora 2</h1>
+    <form action="/calcular2" method="POST">
+        <input type="text" name="expressao" placeholder="Ex: 5 + 3 * 2" required>
+        <button type="submit">Calcular</button>
+    </form>
 </body>
+
 </html>
