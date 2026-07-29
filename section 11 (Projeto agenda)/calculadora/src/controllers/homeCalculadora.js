@@ -4,6 +4,10 @@ exports.home = (req, res) => {
     res.render('paginaCalculadora');
 }
 
+exports.pagina = (req, res) => {
+    res.render('pagina');
+}
+
 exports.calculo = (req, res) => {
     const n1 = parseFloat(req.body.num1);
     const n2 = parseFloat(req.body.num2);

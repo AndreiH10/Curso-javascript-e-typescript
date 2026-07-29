@@ -11,4 +11,6 @@ route.post('/calcular', homeCalculadora.calculo);
 
 route.post('/calcular2', validacaoNumeros, homeCalculadora.calculo2);
 
+route.get('/', homeCalculadora.pagina);
+
 module.exports = route;
