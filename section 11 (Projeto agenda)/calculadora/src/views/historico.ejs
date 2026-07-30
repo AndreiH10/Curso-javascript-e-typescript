@@ -1,0 +1,38 @@
+<%- include('includes/head')%>
+
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 my-3">
+                <h1 class="text-center">Histórico de cálculos</h1>
+
+                <div class="responsive-table">
+                    <table class="table table-striped my-3">
+                        <thead class="thead-dark">
+                            <th scope="col">Cálculo</th>
+                            <th scope="col">Resultado</th>
+                            <th scope="col">Data e hora</th>
+                        </thead>
+                        <tbody>
+                            <% calculos.forEach(calc=> {%>
+                                <tr>
+                                    <td>
+                                        <%= calc.calculo %>
+                                    </td>
+                                    <td>
+                                        <%= calc.resultado %>
+                                    </td>
+                                    <td>
+                                        <%= calc.data.toLocaleString('pt-BR') %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('includes/footer')%>

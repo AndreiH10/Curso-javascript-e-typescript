@@ -5,12 +5,16 @@ const homeCalculadora = require('./src/controllers/homeCalculadora');
 
 const { validacaoNumeros } = require('./src/middlewares/middleware');
 
-route.get('/calculadora', homeCalculadora.home);
+route.get('/calculadoraAntiga', homeCalculadora.calculadoraAntiga);
 
 route.post('/calcular', homeCalculadora.calculo);
 
 route.post('/calcular2', validacaoNumeros, homeCalculadora.calculo2);
 
-route.get('/', homeCalculadora.pagina);
+route.get('/historico', homeCalculadora.historico);
+
+route.get('/', homeCalculadora.links);
+
+route.get('/calculadora', homeCalculadora.calculadoraNova);
 
 module.exports = route;

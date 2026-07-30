@@ -1,0 +1,41 @@
+<%- include('includes/head')%>
+
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 my-3 bg-light p-4 rounded shadow-sm">
+                <h1 class="text-center">Calculadoras</h1>
+ 
+                <form action="/calcular" method="post">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="row">
+                        <label>Calculadora 1</label>
+                        <div class="col">
+                            <input type="number" name="num1" class="form-control" placeholder="Primeiro número">
+                        </div>
+                        <div class="col">
+                            <input type="number" name="num2" class="form-control" placeholder="Segundo número">
+                        </div>
+                        <select name="operacao">
+                            <option value="soma">Somar</option>
+                            <option value="subtracao">Subtrair</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary w-100">Calcular</button>
+                </form>
+                <br>
+                <form action="/calcular2" method="post">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="form-group">
+                        <label>Calculadora 2</label>
+                        <input type="text" name="expressao" class="form-control" placeholder="Ex: 5 + 3 * 2" required> <br>
+                        <button type="submit" class="btn btn-primary w-100">Calcular</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    <%- include('includes/footer')%>

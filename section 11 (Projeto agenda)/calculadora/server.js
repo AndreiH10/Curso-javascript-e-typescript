@@ -52,6 +52,6 @@ app.use(routes);
 const PORT = 3000;
 app.on('pronto', () => {
     app.listen(PORT , () => {
-        console.log(`Servidor aberto em https://localhost:${PORT}/calculadora`);
+        console.log(`Servidor aberto em https://localhost:${PORT}`);
     })
 })
