@@ -7,9 +7,10 @@ const path = require('path');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const csrf = require('csurf');
-const { checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware');
+const { checkCsrfError, csrfMiddleware, middlewareErrors } = require('./src/middlewares/middleware');
 const session = require('express-session');
 const MongoStore = require('connect-mongo').default;
+const flash = require('connect-flash');
 
 app.use(helmet());
 
@@ -40,12 +41,14 @@ const sessionOptions = session({
     }
 });
 app.use(sessionOptions);
+app.use(flash());
 
 app.use(csrf());
 
 //middlewares
 app.use(checkCsrfError);
 app.use(csrfMiddleware);
+app.use(middlewareErrors);
 
 app.use(routes);
 
