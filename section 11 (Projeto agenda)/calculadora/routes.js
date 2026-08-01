@@ -5,23 +5,25 @@ const route = express.Router();
 const homeCalculadora = require('./src/controllers/homeCalculadora');
 const loginController = require('./src/controllers/loginController');
 
-const { validacaoNumeros } = require('./src/middlewares/middleware');
+const { validacaoNumeros, loginRequired } = require('./src/middlewares/middleware');
 
-route.get('/calculadoraAntiga', homeCalculadora.calculadoraAntiga);
+route.get('/calculadoraAntiga', loginRequired, homeCalculadora.calculadoraAntiga);
 
 route.post('/calcular', homeCalculadora.calculo);
 
 route.post('/calcular2', validacaoNumeros, homeCalculadora.calculo2);
 
-route.get('/historico', homeCalculadora.historico);
+route.get('/historico', loginRequired, homeCalculadora.historico);
 
-route.get('/', homeCalculadora.links);
+// route.get('/', homeCalculadora.links);
 
-route.get('/calculadora', homeCalculadora.calculadoraNova);
+route.get('/calculadora', loginRequired, homeCalculadora.calculadoraNova);
 
 //login
 route.get('/login/index', loginController.index);
 route.post('/login/register', loginController.register);
 route.post('/login/login', loginController.login);
+route.get('/login/logout', loginController.logout);
+route.get('/', loginController.paginaInicial);
 
 module.exports = route;

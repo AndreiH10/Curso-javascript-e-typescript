@@ -7,7 +7,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const csrf = require('csurf');
-const { checkCsrfError, csrfMiddleware, middlewareErrors } = require('./src/middlewares/middleware');
+const { checkCsrfError, csrfMiddleware, middlewareErrors, middlewareSessions } = require('./src/middlewares/middleware');
 const session = require('express-session');
 const MongoStore = require('connect-mongo').default;
 const flash = require('connect-flash');
@@ -17,7 +17,7 @@ app.use(helmet());
 
 mongoose.connect(process.env.CONNECTIONSTRING)
     .then(() => {
-        console.log('Conectei à base de dados.');
+        console.log('Conectado à base de dados.');
         app.emit('pronto');
     })
     .catch(e => console.log(e));
@@ -49,6 +49,7 @@ app.use(csrf());
 app.use(checkCsrfError);
 app.use(csrfMiddleware);
 app.use(middlewareErrors);
+app.use(middlewareSessions);
 
 app.use(routes);
 
