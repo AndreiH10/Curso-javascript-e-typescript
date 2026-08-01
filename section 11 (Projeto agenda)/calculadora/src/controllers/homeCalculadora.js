@@ -14,11 +14,21 @@ exports.calculadoraNova= (req, res) => {
 
 exports.historico = async (req, res) => {
     try {
-        const calculos = await Calculos.buscaCalculos();
+        const calculos = await Calculos.buscaCalculos(req.session.user._id);
         return res.render('historico', { calculos, titulo: 'Histórico' });
     } catch (e) {
         console.log(e);
         return res.render('erro')
+    }
+}
+
+exports.historicoGeral = async (req, res) => {
+    try{
+        const calculos = await Calculos.buscaTodosOsCalculos();
+
+        return res.render('historico', { calculos, titulo: 'Histórico' });
+    } catch(e){
+        console.log(e);
     }
 }
 
@@ -43,7 +53,7 @@ exports.calculo = async (req, res) => {
     try{
         const calculo = new Calculos(req.body)
         const expressao = `${n1}${sinalOperacao}${n2}`
-        const dados = await calculo.registra(expressao, resultado)
+        const dados = await calculo.registra(expressao, resultado, req.session.user._id)
         console.log(dados);
         return res.render('paginaResultadoNova', { resultado, titulo: 'Resultado' });
     } catch(e){
@@ -64,7 +74,7 @@ exports.calculo2 = async (req, res) => {
     try{
         const calculo = new Calculos(req.body)
     
-        const dados = await calculo.registra(expressao, resultado)
+        const dados = await calculo.registra(expressao, resultado, req.session.user._id)
         console.log(dados);
         return res.render('paginaResultadoNova', { resultado, titulo: 'Resultado' });
     } catch(e){

@@ -15,6 +15,8 @@ route.post('/calcular2', validacaoNumeros, homeCalculadora.calculo2);
 
 route.get('/historico', loginRequired, homeCalculadora.historico);
 
+route.get('/historicoGeral', loginRequired, homeCalculadora.historicoGeral);
+
 // route.get('/', homeCalculadora.links);
 
 route.get('/calculadora', loginRequired, homeCalculadora.calculadoraNova);

@@ -5,7 +5,11 @@
         <div class="row justify-content-center">
 
             <div class="col-lg-8 my-3">
-                <h1 class="text-center">Histórico de cálculos</h1>
+                <% if(calculos[0].user && calculos[0].user.email) { %>
+                    <h1 class="text-center">Histórico geral</h1>
+                <% } else { %>
+                    <h1 class="text-center">Seu histórico</h1>
+                <% } %>
 
                 <div class="responsive-table">
                     <table class="table table-striped my-3">
@@ -13,6 +17,9 @@
                             <th scope="col">Cálculo</th>
                             <th scope="col">Resultado</th>
                             <th scope="col">Data e hora</th>
+                            <% if(calculos.length > 0 && calculos[0].user && calculos[0].user.email) { %>
+                                <th scope="col">Usuário</th>
+                            <% } %>
                         </thead>
                         <tbody>
                             <% calculos.forEach(calc=> {%>
@@ -26,6 +33,14 @@
                                     <td>
                                         <%= calc.data.toLocaleString('pt-BR') %>
                                     </td>
+                                    <% if(calc.user && calc.user.email) { %>
+                                        <td>
+                                            <%= calc.user.email %>
+                                        </td>
+                                    <% } %>
+                                    <!-- <td>
+                                        <a href="/delete/<% calc._id %>"></a>
+                                    </td> -->
                                 </tr>
                                 <% }) %>
                         </tbody>
