@@ -39,6 +39,12 @@ class Calculos {
             throw e;
         }
     }
+
+    static async delete(id){
+        if(typeof id !== 'string') return;
+        const calculo = await CalculosModel.findOneAndDelete({ _id: id });
+        return calculo;
+    }
 }
 
 

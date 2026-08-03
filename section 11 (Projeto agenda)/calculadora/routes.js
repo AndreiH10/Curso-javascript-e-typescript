@@ -21,6 +21,8 @@ route.get('/historicoGeral', loginRequired, homeCalculadora.historicoGeral);
 
 route.get('/calculadora', loginRequired, homeCalculadora.calculadoraNova);
 
+route.get('/delete/:id', loginRequired, homeCalculadora.delete);
+
 //login
 route.get('/login/index', loginController.index);
 route.post('/login/register', loginController.register);

@@ -1,54 +1,65 @@
 <%- include('includes/head')%>
-<%- include('includes/nav') %>
+    <%- include('includes/nav') %>
 
-    <div class="container">
-        <div class="row justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center">
 
-            <div class="col-lg-8 my-3">
-                <% if(calculos[0].user && calculos[0].user.email) { %>
-                    <h1 class="text-center">Histórico geral</h1>
-                <% } else { %>
-                    <h1 class="text-center">Seu histórico</h1>
-                <% } %>
-
-                <div class="responsive-table">
-                    <table class="table table-striped my-3">
-                        <thead class="thead-dark">
-                            <th scope="col">Cálculo</th>
-                            <th scope="col">Resultado</th>
-                            <th scope="col">Data e hora</th>
-                            <% if(calculos.length > 0 && calculos[0].user && calculos[0].user.email) { %>
-                                <th scope="col">Usuário</th>
+                <div class="col-lg-8 my-3">
+                    <% if(pagina==='geral' ) { %>
+                        <h1 class="text-center">Histórico geral</h1>
+                        <% } else { %>
+                            <h1 class="text-center">Seu histórico</h1>
                             <% } %>
-                        </thead>
-                        <tbody>
-                            <% calculos.forEach(calc=> {%>
-                                <tr>
-                                    <td>
-                                        <%= calc.calculo %>
-                                    </td>
-                                    <td>
-                                        <%= calc.resultado %>
-                                    </td>
-                                    <td>
-                                        <%= calc.data.toLocaleString('pt-BR') %>
-                                    </td>
-                                    <% if(calc.user && calc.user.email) { %>
-                                        <td>
-                                            <%= calc.user.email %>
-                                        </td>
-                                    <% } %>
-                                    <!-- <td>
-                                        <a href="/delete/<% calc._id %>"></a>
-                                    </td> -->
-                                </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
+
+                                <div class="responsive-table">
+                                    <table class="table table-striped my-3">
+                                        <% if(calculos.length> 0) { %>
+                                            <thead class="thead-dark">
+                                                <th scope="col">Cálculo</th>
+                                                <th scope="col">Resultado</th>
+                                                <th scope="col">Data e hora</th>
+                                                <% if(calculos.length> 0 && calculos[0].user && calculos[0].user.email)
+                                                    { %>
+                                                    <th scope="col">Usuário</th>
+                                                    <% } %>
+                                                        <th scope="col"></th>
+                                            </thead>
+                                            <% } %>
+                                                <tbody>
+                                                    <% calculos.forEach(calc=> {%>
+                                                        <tr>
+                                                            <td>
+                                                                <%= calc.calculo %>
+                                                            </td>
+                                                            <td>
+                                                                <%= calc.resultado %>
+                                                            </td>
+                                                            <td>
+                                                                <%= calc.data.toLocaleString('pt-BR') %>
+                                                            </td>
+                                                            <% if(calc.user && calc.user.email) { %>
+                                                                <td>
+                                                                    <%= calc.user.email %>
+                                                                </td>
+                                                                <% } %>
+                                                                    <td>
+                                                                        <% const idUsuarioLogado=user ? user._id.toString() : '' ; %>
+                                                                        <% const eDono=calc.user && calc.user._id.toString()===idUsuarioLogado; %>
+
+                                                                        <% if (eDono || pagina === 'pessoal') {%>
+                                                                            <a class="text-danger" href="/delete/<%= calc._id %>?redirectTo=<%= pagina === 'geral' ? '/historicoGeral' : '/historico'%>">Excluir</a>
+                                                                        <% } else { %>
+                                                                            <span class="text-muted">Sem permissão para excluir</span>
+                                                                        <% } %>
+                                                                    </td>
+                                                        </tr>
+                                                        <% }) %>
+                                                </tbody>
+                                    </table>
+                                </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <%- include('includes/footer')%>
+        <%- include('includes/footer')%>

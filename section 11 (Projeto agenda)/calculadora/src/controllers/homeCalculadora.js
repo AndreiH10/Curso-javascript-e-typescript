@@ -15,7 +15,7 @@ exports.calculadoraNova= (req, res) => {
 exports.historico = async (req, res) => {
     try {
         const calculos = await Calculos.buscaCalculos(req.session.user._id);
-        return res.render('historico', { calculos, titulo: 'Histórico' });
+        return res.render('historico', { calculos, titulo: 'Histórico', pagina: 'pessoal' });
     } catch (e) {
         console.log(e);
         return res.render('erro')
@@ -26,7 +26,7 @@ exports.historicoGeral = async (req, res) => {
     try{
         const calculos = await Calculos.buscaTodosOsCalculos();
 
-        return res.render('historico', { calculos, titulo: 'Histórico' });
+        return res.render('historico', { calculos, titulo: 'Histórico', pagina: 'geral' });
     } catch(e){
         console.log(e);
     }
@@ -81,4 +81,25 @@ exports.calculo2 = async (req, res) => {
         console.log(e);
     }
         
+}
+
+exports.delete = async (req, res) => {
+    if(!req.params.id) return res.send('erro');
+
+    try{
+        const calculo = await Calculos.delete(req.params.id);
+
+        const redirectTo = req.query.redirectTo;
+
+        if(!calculo){
+            req.flash('error', 'Cálculo não encontrado');
+            return req.session.save(() => res.redirect(redirectTo));
+        }
+
+        req.flash('success', 'Contato apagado com sucesso.');
+        req.session.save(() => res.redirect(redirectTo));
+        return;
+    } catch(e){
+        console.log(e);
+    }
 }

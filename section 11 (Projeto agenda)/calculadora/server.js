@@ -12,7 +12,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo').default;
 const flash = require('connect-flash');
 
-app.use(helmet());
+//app.use(helmet());
 
 
 mongoose.connect(process.env.CONNECTIONSTRING)
