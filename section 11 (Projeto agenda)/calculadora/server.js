@@ -45,6 +45,8 @@ app.use(flash());
 
 app.use(csrf());
 
+app.use(express.static(path.resolve(__dirname, 'public')));
+
 //middlewares
 app.use(checkCsrfError);
 app.use(csrfMiddleware);
