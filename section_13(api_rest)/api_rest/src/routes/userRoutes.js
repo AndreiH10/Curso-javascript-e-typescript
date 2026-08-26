@@ -7,9 +7,9 @@ const router = new Router();
 
 //Não deveria existir em uma aplicação real
 // router.get('/:id', userController.show);
-router.get('/', userController.index);
+// router.get('/', userController.index);
 
-router.post('/', userController.store);
+router.post('/', loginRequired, userController.store);
 router.put('/', loginRequired, userController.update);
 router.delete('/', loginRequired, userController.delete);
 
